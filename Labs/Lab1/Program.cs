@@ -16,6 +16,10 @@
                 }
 
                 int days = DocumentUtils.ParseAndValidateNumber(lines[0]);
+                if (days < 1 || days > 100)
+                {
+                    throw new ArgumentException("Кількість днів вказана неправильно");
+                }
 
                 int[] prices = DocumentUtils.ParseAndValidateLine(lines[1]);
 
