@@ -6,7 +6,7 @@
         {
             try
             {
-                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\input.txt");
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..", @"..", @"..", "input.txt");
 
                 string[] lines = File.ReadLines(filePath).Take(2).ToArray();
 
