@@ -7,7 +7,7 @@ namespace Lab3.Tests
         public void CountGroupsInAtari_VariousBoards_ReturnsExpectedResult(char[][] board, int N, int expectedAtariGroups)
         {
             // Act
-            int result = CountGroupsInAtari(board, N);
+            int result = GoGame.CountGroupsInAtari(board, N);
 
             // Assert
             Assert.Equal(expectedAtariGroups, result);
@@ -74,13 +74,6 @@ namespace Lab3.Tests
             6,
             0
             };
-        }
-
-        // Заглушка для методу CountGroupsInAtari
-        public static int CountGroupsInAtari(char[][] board, int N)
-        {
-            // Реалізація методу підрахунку груп в атарі
-            return 0; // Заглушка для прикладу
         }
     }
 }
