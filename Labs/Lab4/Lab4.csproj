@@ -5,7 +5,22 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>run-lab4</ToolCommandName>
+    <PackageId>MDubovyk</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Maksym Dubovyk</Authors>
+    <Description>A tool to run lab applications</Description>
+    <PackageOutputPath>./nupkgs</PackageOutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Vagrantfile" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Vagrantfile" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.1" />
