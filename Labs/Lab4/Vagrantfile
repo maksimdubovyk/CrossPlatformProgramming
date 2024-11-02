@@ -3,13 +3,17 @@
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "1024"
     vb.cpus = 2
+    vb.gui = true
   end
+
+  config.ssh.username = "vagrant"
+  config.ssh.password = "vagrant"
 
  config.vm.define "windows" do |windows|
     windows.vm.box = "hashicorp/bionic64"
     windows.vm.provision "shell", inline: <<-SHELL
       dotnet nuget add source http://192.168.56.1:5000/v3/index.json --name BaGet --store-password-in-clear-text
-      dotnet tool install --global MDubovyk --version <1.0.0> --add-source http://192.168.56.1:5000/v3/index.json
+      dotnet tool install --global MDubovyk --version 1.0.0 --add-source http://192.168.56.1:5000/v3/index.json
     SHELL
   end
 
@@ -22,7 +26,7 @@
       export PATH=$PATH:/usr/share/dotnet
 
       dotnet nuget add source http://192.168.56.1:5000/v3/index.json --name BaGet --store-password-in-clear-text
-      dotnet tool install --global MDubovyk --version <1.0.0> --add-source http://192.168.56.1:5000/v3/index.json
+      dotnet tool install --global MDubovyk --version 1.0.0 --add-source http://192.168.56.1:5000/v3/index.json
     SHELL
   end
 
@@ -35,7 +39,7 @@
       export PATH=$PATH:/usr/share/dotnet
 
       dotnet nuget add source http://192.168.56.1:5000/v3/index.json --name BaGet --store-password-in-clear-text
-      dotnet tool install --global MDubovyk --version <1.0.0> --add-source http://192.168.56.1:5000/v3/index.json
+      dotnet tool install --global MDubovyk --version 1.0.0 --add-source http://192.168.56.1:5000/v3/index.json
     SHELL
   end
 end

@@ -15,14 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Vagrantfile" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Vagrantfile" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.1" />
   </ItemGroup>
 

@@ -7,38 +7,7 @@ namespace Lab4
     [Subcommand(typeof(VersionCommand), typeof(RunCommand), typeof(SetPathCommand))]
     class Program
     {
-        public static int Main(string[] args)
-        {
-            if (args.Length > 0)
-            {
-                // Run the command if arguments are provided.
-                return CommandLineApplication.Execute<Program>(args);
-            }
-
-            // Interactive mode if no arguments are provided.
-            while (true)
-            {
-                Console.Write("Enter command (or type 'exit' to quit): ");
-                string? input = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    Console.WriteLine("No command provided.");
-                    continue;
-                }
-
-                if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
-                {
-                    Console.WriteLine("Exiting program...");
-                    break;
-                }
-
-                string[] inputArgs = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                CommandLineApplication.Execute<Program>(inputArgs);
-            }
-
-            return 0;
-        }
+        public static int Main(string[] args) => CommandLineApplication.Execute<Program>(args);
 
         private void OnExecute()
         {
