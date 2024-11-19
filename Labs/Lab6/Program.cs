@@ -1,4 +1,6 @@
 
+using Lab6.DbUtils;
+
 namespace Lab6
 {
     public class Program
@@ -8,11 +10,14 @@ namespace Lab6
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            // Configure Swagger for API documentation.
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Add database options
+            builder.Services.AddDatabaseOptions(builder.Configuration);
 
             var app = builder.Build();
 
@@ -24,12 +29,8 @@ namespace Lab6
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
