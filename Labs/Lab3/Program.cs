@@ -1,4 +1,7 @@
-﻿namespace Lab3
+﻿
+using GoGameLibrary;
+
+namespace Lab3
 {
     internal class Program
     {

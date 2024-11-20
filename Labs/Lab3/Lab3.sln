@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab3", "Lab3.csproj", "{BB02B294-0BB4-425E-AA94-F0A7EE609A93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab3", "Lab3.csproj", "{BB02B294-0BB4-425E-AA94-F0A7EE609A93}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentUtils", "..\DocumentUtils\DocumentUtils.csproj", "{1766CBA5-F55E-4ECF-8309-C0C21B31C1D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoGameLibrary", "..\GoGameLibrary\GoGameLibrary.csproj", "{EC050367-3690-40E5-B14E-CCC4752F966A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1766CBA5-F55E-4ECF-8309-C0C21B31C1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1766CBA5-F55E-4ECF-8309-C0C21B31C1D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1766CBA5-F55E-4ECF-8309-C0C21B31C1D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC050367-3690-40E5-B14E-CCC4752F966A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC050367-3690-40E5-B14E-CCC4752F966A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC050367-3690-40E5-B14E-CCC4752F966A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC050367-3690-40E5-B14E-CCC4752F966A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿namespace Lab3
+﻿namespace GoGameLibrary
 {
     public static class GoGame
     {
