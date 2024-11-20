@@ -3,8 +3,8 @@ using System;
 using Lab6.DbUtils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,27 +18,27 @@ namespace Lab6.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Lab6.Models.Address", b =>
                 {
                     b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AddressId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
 
                     b.Property<string>("AddressDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("AddressTypeCode")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("CompanyId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("AddressId");
 
@@ -69,17 +69,17 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CompanyId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
 
                     b.Property<string>("CompanyDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CompanyId");
 
@@ -104,22 +104,22 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CustomerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("integer");
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CustomerDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerTypeCode")
-                        .HasColumnType("integer");
+                    b.Property<int?>("CustomerTypeCode")
+                        .HasColumnType("int");
 
-                    b.Property<int>("EndUserId")
-                        .HasColumnType("integer");
+                    b.Property<int?>("EndUserId")
+                        .HasColumnType("int");
 
                     b.HasKey("CustomerId");
 
@@ -130,40 +130,58 @@ namespace Lab6.Migrations
                     b.HasIndex("EndUserId");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = 1,
+                            CompanyId = 1,
+                            CustomerDetails = "Regular customer details for TechCorp",
+                            CustomerTypeCode = 1,
+                            EndUserId = 1
+                        },
+                        new
+                        {
+                            CustomerId = 2,
+                            CompanyId = 2,
+                            CustomerDetails = "Premium customer details for SoftSolutions",
+                            CustomerTypeCode = 2,
+                            EndUserId = 2
+                        });
                 });
 
             modelBuilder.Entity("Lab6.Models.CustomerMachine", b =>
                 {
                     b.Property<int>("MachineId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MachineId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MachineId"));
 
                     b.Property<int>("CustomerId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("DistributorId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("InstallationLocationAddress")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MachineDescription")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MachineName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MachineOtherDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MachineType")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("MachineId");
 
@@ -204,20 +222,20 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("DistributorId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DistributorId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DistributorId"));
 
                     b.Property<string>("DistributorName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OtherDistributorDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ServiceVendorId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("DistributorId");
 
@@ -246,13 +264,13 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("EndUserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EndUserId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EndUserId"));
 
                     b.Property<string>("EndUserDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EndUserId");
 
@@ -275,13 +293,13 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("AddressTypeCode")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AddressTypeCode"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressTypeCode"));
 
                     b.Property<string>("AddressTypeDescription")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AddressTypeCode");
 
@@ -304,13 +322,13 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("CustomerTypeCode")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CustomerTypeCode"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerTypeCode"));
 
                     b.Property<string>("CustomerTypeDescription")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerTypeCode");
 
@@ -333,13 +351,13 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("MachineType")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MachineType"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MachineType"));
 
                     b.Property<string>("MachineTypeDescription")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MachineType");
 
@@ -362,13 +380,13 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("ServiceTypeCode")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ServiceTypeCode"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceTypeCode"));
 
                     b.Property<string>("ServiceTypeDescription")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ServiceTypeCode");
 
@@ -390,20 +408,20 @@ namespace Lab6.Migrations
             modelBuilder.Entity("Lab6.Models.Service", b =>
                 {
                     b.Property<int>("ServiceTypeCode")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfService")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("DistributorId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("OtherServiceDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ServiceVendorId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("ServiceTypeCode");
 
@@ -436,13 +454,13 @@ namespace Lab6.Migrations
                 {
                     b.Property<int>("ServiceVendorId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ServiceVendorId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceVendorId"));
 
                     b.Property<string>("ServiceVendorDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ServiceVendorId");
 
@@ -472,7 +490,7 @@ namespace Lab6.Migrations
                     b.HasOne("Lab6.Models.Company", "Company")
                         .WithMany("Addresses")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("AddressType");
@@ -485,20 +503,17 @@ namespace Lab6.Migrations
                     b.HasOne("Lab6.Models.Company", "Company")
                         .WithMany("Customers")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Lab6.Models.RefCustomerType", "CustomerType")
                         .WithMany("Customers")
                         .HasForeignKey("CustomerTypeCode")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Lab6.Models.EndUser", "EndUser")
                         .WithMany("Customers")
                         .HasForeignKey("EndUserId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Company");
 
@@ -512,7 +527,7 @@ namespace Lab6.Migrations
                     b.HasOne("Lab6.Models.Customer", "Customer")
                         .WithMany("CustomerMachines")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Lab6.Models.Distributor", "Distributor")
@@ -539,7 +554,7 @@ namespace Lab6.Migrations
                     b.HasOne("Lab6.Models.ServiceVendor", "ServiceVendor")
                         .WithMany("Distributors")
                         .HasForeignKey("ServiceVendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ServiceVendor");
@@ -562,7 +577,7 @@ namespace Lab6.Migrations
                     b.HasOne("Lab6.Models.ServiceVendor", "ServiceVendor")
                         .WithMany("Services")
                         .HasForeignKey("ServiceVendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Distributor");

@@ -1,5 +1,6 @@
 ﻿using Lab6.DbUtils;
 using Lab6.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ namespace Lab6.Controllers
 
         // GET: api/Customers
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetCustomers()
         {
             var customers = await _context.Customers

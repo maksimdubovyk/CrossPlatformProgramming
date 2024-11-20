@@ -24,7 +24,7 @@ namespace Lab6.DbUtils
                 .HasOne(c => c.Company)
                 .WithMany(co => co.Customers)
                 .HasForeignKey(c => c.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Customer>()
                 .HasOne(c => c.CustomerType)
@@ -42,7 +42,7 @@ namespace Lab6.DbUtils
                 .HasOne(a => a.Company)
                 .WithMany(co => co.Addresses)
                 .HasForeignKey(a => a.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Address>()
                 .HasOne(a => a.AddressType)
@@ -54,7 +54,7 @@ namespace Lab6.DbUtils
                 .HasOne(cm => cm.Customer)
                 .WithMany(c => c.CustomerMachines)
                 .HasForeignKey(cm => cm.CustomerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<CustomerMachine>()
                 .HasOne(cm => cm.Distributor)
@@ -72,7 +72,7 @@ namespace Lab6.DbUtils
                 .HasOne(d => d.ServiceVendor)
                 .WithMany(sv => sv.Distributors)
                 .HasForeignKey(d => d.ServiceVendorId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Service>()
                 .HasOne(s => s.ServiceType)
@@ -84,7 +84,7 @@ namespace Lab6.DbUtils
                 .HasOne(s => s.ServiceVendor)
                 .WithMany(sv => sv.Services)
                 .HasForeignKey(s => s.ServiceVendorId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<RefCustomerType>()
                 .HasKey(rt => rt.CustomerTypeCode);
@@ -142,6 +142,26 @@ namespace Lab6.DbUtils
                 new Address { AddressId = 1, CompanyId = 1, AddressTypeCode = 1, AddressDetails = "123 Tech Street" },
                 new Address { AddressId = 2, CompanyId = 2, AddressTypeCode = 2, AddressDetails = "456 Business Ave" }
             );
+
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer
+                {
+                    CustomerId = 1,
+                    CompanyId = 1,
+                    CustomerTypeCode = 1,
+                    EndUserId = 1,
+                    CustomerDetails = "Regular customer details for TechCorp"
+                },
+                new Customer
+                {
+                    CustomerId = 2,
+                    CompanyId = 2,
+                    CustomerTypeCode = 2,
+                    EndUserId = 2,
+                    CustomerDetails = "Premium customer details for SoftSolutions"
+                }
+            );
+
 
             modelBuilder.Entity<CustomerMachine>().HasData(
                 new CustomerMachine

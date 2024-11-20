@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,10 +17,10 @@ namespace Lab6.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    CompanyId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CompanyName = table.Column<string>(type: "text", nullable: false),
-                    CompanyDetails = table.Column<string>(type: "text", nullable: false)
+                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,9 +31,9 @@ namespace Lab6.Migrations
                 name: "EndUser",
                 columns: table => new
                 {
-                    EndUserId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EndUserDetails = table.Column<string>(type: "text", nullable: false)
+                    EndUserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EndUserDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,9 +44,9 @@ namespace Lab6.Migrations
                 name: "RefAddressType",
                 columns: table => new
                 {
-                    AddressTypeCode = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AddressTypeDescription = table.Column<string>(type: "text", nullable: false)
+                    AddressTypeCode = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AddressTypeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,9 +57,9 @@ namespace Lab6.Migrations
                 name: "RefCustomerTypes",
                 columns: table => new
                 {
-                    CustomerTypeCode = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CustomerTypeDescription = table.Column<string>(type: "text", nullable: false)
+                    CustomerTypeCode = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerTypeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,9 +70,9 @@ namespace Lab6.Migrations
                 name: "RefMachineTypes",
                 columns: table => new
                 {
-                    MachineType = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    MachineTypeDescription = table.Column<string>(type: "text", nullable: false)
+                    MachineType = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MachineTypeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,9 +83,9 @@ namespace Lab6.Migrations
                 name: "RefServiceTypes",
                 columns: table => new
                 {
-                    ServiceTypeCode = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ServiceTypeDescription = table.Column<string>(type: "text", nullable: false)
+                    ServiceTypeCode = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceTypeDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,9 +96,9 @@ namespace Lab6.Migrations
                 name: "ServiceVendors",
                 columns: table => new
                 {
-                    ServiceVendorId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ServiceVendorDetails = table.Column<string>(type: "text", nullable: false)
+                    ServiceVendorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceVendorDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,11 +109,11 @@ namespace Lab6.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    AddressId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CompanyId = table.Column<int>(type: "integer", nullable: false),
-                    AddressTypeCode = table.Column<int>(type: "integer", nullable: false),
-                    AddressDetails = table.Column<string>(type: "text", nullable: false)
+                    AddressId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    AddressTypeCode = table.Column<int>(type: "int", nullable: false),
+                    AddressDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,7 +123,7 @@ namespace Lab6.Migrations
                         column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Addresses_RefAddressType_AddressTypeCode",
                         column: x => x.AddressTypeCode,
@@ -137,12 +136,12 @@ namespace Lab6.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustomerId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CompanyId = table.Column<int>(type: "integer", nullable: false),
-                    CustomerTypeCode = table.Column<int>(type: "integer", nullable: false),
-                    EndUserId = table.Column<int>(type: "integer", nullable: false),
-                    CustomerDetails = table.Column<string>(type: "text", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyId = table.Column<int>(type: "int", nullable: true),
+                    CustomerTypeCode = table.Column<int>(type: "int", nullable: true),
+                    EndUserId = table.Column<int>(type: "int", nullable: true),
+                    CustomerDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -152,7 +151,7 @@ namespace Lab6.Migrations
                         column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Customers_EndUser_EndUserId",
                         column: x => x.EndUserId,
@@ -171,11 +170,11 @@ namespace Lab6.Migrations
                 name: "Distributors",
                 columns: table => new
                 {
-                    DistributorId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ServiceVendorId = table.Column<int>(type: "integer", nullable: false),
-                    DistributorName = table.Column<string>(type: "text", nullable: false),
-                    OtherDistributorDetails = table.Column<string>(type: "text", nullable: false)
+                    DistributorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceVendorId = table.Column<int>(type: "int", nullable: false),
+                    DistributorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OtherDistributorDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,22 +184,22 @@ namespace Lab6.Migrations
                         column: x => x.ServiceVendorId,
                         principalTable: "ServiceVendors",
                         principalColumn: "ServiceVendorId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "CustomerMachines",
                 columns: table => new
                 {
-                    MachineId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CustomerId = table.Column<int>(type: "integer", nullable: false),
-                    DistributorId = table.Column<int>(type: "integer", nullable: false),
-                    MachineType = table.Column<int>(type: "integer", nullable: false),
-                    MachineName = table.Column<string>(type: "text", nullable: false),
-                    MachineDescription = table.Column<string>(type: "text", nullable: false),
-                    InstallationLocationAddress = table.Column<string>(type: "text", nullable: false),
-                    MachineOtherDetails = table.Column<string>(type: "text", nullable: false)
+                    MachineId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    DistributorId = table.Column<int>(type: "int", nullable: false),
+                    MachineType = table.Column<int>(type: "int", nullable: false),
+                    MachineName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MachineDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InstallationLocationAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MachineOtherDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -210,7 +209,7 @@ namespace Lab6.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CustomerMachines_Distributors_DistributorId",
                         column: x => x.DistributorId,
@@ -229,11 +228,11 @@ namespace Lab6.Migrations
                 name: "Services",
                 columns: table => new
                 {
-                    ServiceTypeCode = table.Column<int>(type: "integer", nullable: false),
-                    DistributorId = table.Column<int>(type: "integer", nullable: false),
-                    ServiceVendorId = table.Column<int>(type: "integer", nullable: false),
-                    DateOfService = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    OtherServiceDetails = table.Column<string>(type: "text", nullable: false)
+                    ServiceTypeCode = table.Column<int>(type: "int", nullable: false),
+                    DistributorId = table.Column<int>(type: "int", nullable: false),
+                    ServiceVendorId = table.Column<int>(type: "int", nullable: false),
+                    DateOfService = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OtherServiceDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -255,7 +254,7 @@ namespace Lab6.Migrations
                         column: x => x.ServiceVendorId,
                         principalTable: "ServiceVendors",
                         principalColumn: "ServiceVendorId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -328,6 +327,15 @@ namespace Lab6.Migrations
                 {
                     { 1, "123 Tech Street", 1, 1 },
                     { 2, "456 Business Ave", 2, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "CustomerId", "CompanyId", "CustomerDetails", "CustomerTypeCode", "EndUserId" },
+                values: new object[,]
+                {
+                    { 1, 1, "Regular customer details for TechCorp", 1, 1 },
+                    { 2, 2, "Premium customer details for SoftSolutions", 2, 2 }
                 });
 
             migrationBuilder.InsertData(
