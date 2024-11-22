@@ -19,7 +19,6 @@ namespace Lab6.Controllers
 
         // GET: api/Customers
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetCustomers()
         {
             var customers = await _context.Customers

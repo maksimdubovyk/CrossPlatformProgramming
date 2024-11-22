@@ -27,6 +27,7 @@ namespace Lab5
 
             // Configure the HTTP request pipeline.
             builder.Services.ConfigureSameSiteNoneCookies();
+            builder.Services.AddHttpClient();
             var app = builder.Build();
 
             if (!app.Environment.IsDevelopment())
