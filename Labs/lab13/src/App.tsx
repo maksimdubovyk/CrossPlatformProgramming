@@ -5,6 +5,7 @@ import BoardGame from "./Views/BoardGame";
 import MaxProfit from "./Views/MaxProfit";
 import GoGame from "./Views/GoGame";
 import UserProfile from "./Views/UserProfile";
+import RegisterPage from "./Views/RegisterPage";
 // import Registration from "./Registration"; // Ваш компонент Registration
 
 const App: React.FC = () => {
@@ -30,8 +31,8 @@ const App: React.FC = () => {
                 return <BoardGame />;
             case "Profile":
                 return <UserProfile />;
-            // case "Register":
-            //     return <Registration />;
+            case "Register":
+                return <RegisterPage />;
             default:
                 return <Home />;
         }
